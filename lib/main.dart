@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import './question.dart';
 import './aswner.dart';
 
+import './quiz.dart';
+
 void main() => runApp(App());
 
 class App extends StatefulWidget {
@@ -23,7 +25,7 @@ class AppState extends State<App> {
 
   // @override
   Widget build(BuildContext context) {
-    var questions = [
+    final _questions = const [
       {
         'question': 'What\'s your favorite color?',
         'answers': ['Black', 'Red', 'Blue', 'Yellow']
@@ -44,14 +46,15 @@ class AppState extends State<App> {
         title: Text('First App with Flutter'),
         backgroundColor: Color.fromRGBO(120, 21, 50, 1),
       ),
-      body: Column(children: [
-        Question(
-          questions[_questionIndex]['question'],
-        ),
-        ...(questions[_questionIndex]['answers'] as List<String>).map((answer) {
-          return Aswer(_answerQuestion, answer);
-        }).toList()
-      ]),
+      body: _questionIndex < _questions.length
+          ? Quiz(
+              answerQuestion: _answerQuestion,
+              questionIndex: _questionIndex,
+              questions: _questions,
+            )
+          : Center(
+              child: Text('You finished!'),
+            ),
     ));
   }
 }
