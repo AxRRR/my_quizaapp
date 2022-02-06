@@ -4,6 +4,7 @@ import './question.dart';
 import './aswner.dart';
 
 import './quiz.dart';
+import './result.dart';
 
 void main() => runApp(App());
 
@@ -52,9 +53,7 @@ class AppState extends State<App> {
               questionIndex: _questionIndex,
               questions: _questions,
             )
-          : Center(
-              child: Text('You finished!'),
-            ),
+          : Result(),
     ));
   }
 }
